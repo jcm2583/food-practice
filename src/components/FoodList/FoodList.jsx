@@ -12,6 +12,7 @@ function FoodList () {
 
     const [type, updateType] = useState(foods);
 
+
     useEffect(() => {
         console.log('In useEffect');
         getFood();
