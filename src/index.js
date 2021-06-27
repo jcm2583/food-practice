@@ -1,12 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+
+
+
+const foodList = (state = [], action) => {
+  switch (action.type) {
+    case "GET_FOODS" :
+      return action.payload;
+    default: 
+      return state;
+  }
+    
+}
+
+
+
+
+const storeInstance = createStore(
+  combineReducers({
+    foodList
+  }), 
+  applyMiddleware(logger),
+);
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={storeInstance}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
